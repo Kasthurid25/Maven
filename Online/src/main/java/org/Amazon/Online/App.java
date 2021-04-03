@@ -1,12 +1,21 @@
 package org.Amazon.Online;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
+
 
 
 public class App {
@@ -33,8 +42,6 @@ public class App {
 			.keyDown(sbar, Keys.SHIFT)
 			.sendKeys(sbar, "boat headphone")
 			.keyUp(sbar, Keys.SHIFT)
-			.doubleClick(sbar)
-			.contextClick()
 			.build();
 			
 		seriesOfActions.perform() ;
@@ -43,14 +50,39 @@ public class App {
 		
 
 		} 
+	public void select() {
+		
+		WebElement chk1 = driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/span[1]/div[1]/span[1]/div[1]/div[1]/div[3]/ul[1]/li[1]/span[1]/a[1]/div[1]/label[1]/i[1]"));							
+       	chk1.click();			
+        System.out.println("Option 1 Selected");	
+        WebElement chk2 = driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/span[1]/div[1]/span[1]/div[1]/div[1]/div[5]/ul[3]/li[1]/span[1]/a[1]/div[1]/label[1]/i[1]"));
+        if (chk2.isSelected())
+        {					
+            System.out.println("Checkbox is Toggled On");					
+
+        } else {			
+            System.out.println("Checkbox is Toggled Off");					
+        }	
+	}
+	
+        
+      public void screen() throws IOException {
+    	  TakesScreenshot tk=(TakesScreenshot) driver; 
+    	  File f = tk.getScreenshotAs(OutputType.FILE);
+    	  File f1=new File("F:/facebook.png");  
+    	  FileUtils.copyFile(f,f1 ); 
+      }
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		 System.setProperty("webdriver.chrome.driver","C:\\Users\\user\\Downloads\\chromedriver.exe"); 
 			App m=new App();
 			m.login();
 			m.search();
+			m.select();
+			m.screen();
+						
 			
 
 
