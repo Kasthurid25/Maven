@@ -72,7 +72,6 @@ public class App {
     	  File f1=new File("F:/facebook.png");  
     	  FileUtils.copyFile(f,f1 ); 
       }
-	
 
 	public static void main(String[] args) throws Exception {
 		
